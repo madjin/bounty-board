@@ -76,7 +76,7 @@ top_5_tasks = sorted_tasks[:5]
 formatted_tasks = [f"{task['amount']} | {task['name']} | " for task in top_5_tasks]
 
 # Directory to save the text files
-output_directory = '..'
+output_directory = '.'
 
 # ... [Rest of the script] ...
 
