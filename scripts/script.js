@@ -125,13 +125,19 @@ window.addEventListener("resize", function() {
 
 async function fetchAndUpdateServerList() {
     try {
-        // Fetch the JSON file from your GitHub repository.
-        // Replace 'your-repo-url' with the actual URL to the JSON file in your repo
         const response = await fetch('/tasks.json');
-
         
+        // Check if Content-Type is application/json
+        const contentType = response.headers.get("content-type");
+        if (contentType && contentType.indexOf("application/json") === -1) {
+            throw new Error("Received non-JSON content type");
+        }
+
         if (response.status === 200) {
             const data = await response.json();
+            
+            // Debug log
+            console.log("Fetched data:", data);
             
             // Clear existing list
             const serverList = d3.select("#server-list");
@@ -145,11 +151,14 @@ async function fetchAndUpdateServerList() {
                     window.location.href = server.url;
                 });
             });
+        } else {
+            throw new Error(`Received unexpected status code: ${response.status}`);
         }
     } catch (error) {
         console.error("Error fetching server list: ", error);
     }
 }
+
 
 // Call this function to populate server list
 fetchAndUpdateServerList();
