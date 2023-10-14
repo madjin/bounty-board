@@ -4,7 +4,7 @@ from datetime import datetime
 import re
 
 # Starting with the directory where the CSVs are stored
-directory = '.'
+directory = './bounties/'
 
 # Checking and printing the number of CSV files detected
 csv_files = [f for f in os.listdir(directory) if f.endswith('.csv')]
@@ -75,7 +75,7 @@ top_5_tasks = sorted_tasks[:5]
 formatted_tasks = [f"{task['amount']} | {task['name']} | " for task in top_5_tasks]
 
 # Directory to save the text files
-output_directory = '.'
+output_directory = '..'
 
 # ... [Rest of the script] ...
 
