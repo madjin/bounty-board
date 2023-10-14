@@ -153,7 +153,7 @@ print(f"HTML page generated: {html_file_path}")
 
 # Generate the text files
 for index, task in enumerate(formatted_tasks, 1):
-    file_path = os.path.join(output_directory, f"task{index}.txt")
+    file_path = os.path.join("../scripts/", f"task{index}.txt")
     with open(file_path, "w") as file:
         file.write(task)
     print(f"Saved: {file_path}")
