@@ -1,7 +1,7 @@
  /* Add or merge these styles */
 body {
     font-family: 'Courier New', Courier, monospace;
-    background: black url('matte.jpg') no-repeat center center fixed; /* Assuming this image has the TV graphic in it */
+    background: black; /* url('matte.jpg') no-repeat center center fixed;*/ /* Assuming this image has the TV graphic in it */
     background-size: cover;
     color: #00FF00;
     scrollbar-color: transparent transparent; /*  Both thumb (handle) and track are transparent */
