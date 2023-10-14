@@ -12,15 +12,15 @@ const colorScale = d3.scaleLinear()
 const tasks = Array.from({ length: 200 }, (_, id) => ({
     id,
     name: `Task ${id + 1}`,
-    users: Math.floor(Math.random() * 1996) + 5,
+    amount: Math.floor(Math.random() * 1996) + 5,
     url: `task${id + 1}`,
 }));
 
-// Add this block of code to populate the text list
+// Add this block of code to populate the task list
 const taskList = d3.select("#task-list");
 tasks.forEach(task => {
     const listItem = taskList.append("li");
-    listItem.text(`${task.name}: ${task.users} users`);
+    listItem.text(`${task.name}: ${task.amount} $`);
     listItem.on("click", function() {
         window.location.href = task.url;
     });
@@ -64,7 +64,7 @@ svg.call(zoom).call(zoom.transform, d3.zoomIdentity.scale(0.5));
 const simulation = d3.forceSimulation(tasks)
     .force('charge', d3.forceManyBody().strength(30))
     .force('center', d3.forceCenter(0, 0))
-    .force('collision', d3.forceCollide().radius(d => Math.sqrt(d.users)))
+    .force('collision', d3.forceCollide().radius(d => Math.sqrt(d.amount)))
     .on('tick', ticked);
 
 function ticked() {
@@ -73,13 +73,13 @@ function ticked() {
 
     const newCircles = circles.enter()
         .append('circle')
-        .attr('r', d => Math.sqrt(d.users))
-        .attr('fill', d => colorScale(d.users));
+        .attr('r', d => Math.sqrt(d.amount))
+        .attr('fill', d => colorScale(d.amount));
 
     newCircles.merge(circles)
         .attr('cx', d => d.x)
         .attr('cy', d => d.y)
-        .attr('fill', d => colorScale(d.users))
+        .attr('fill', d => colorScale(d.amount))
         .on("mouseover", function(d) {
             const tooltip = document.getElementById('tooltip');
             tooltip.style.display = "inline";
@@ -95,7 +95,7 @@ function ticked() {
 
     circles.exit().remove();
 
-    applyFlickerEffect(circles.filter(d => d.users > 1500));
+    applyFlickerEffect(circles.filter(d => d.amount > 1500));
 }
 
 function applyFlickerEffect(selection) {
@@ -129,4 +129,4 @@ window.addEventListener("resize", function() {
 
 
 // Call this function only once after the simulation is initialized
-applyFlickerEffect(g.selectAll("circle").filter(d => d.users > 1500));
+applyFlickerEffect(g.selectAll("circle").filter(d => d.amount > 1500));
