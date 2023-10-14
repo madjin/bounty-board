@@ -3,6 +3,7 @@ import pandas as pd
 from datetime import datetime
 import re
 from html import escape
+import json  # <- Import json
 
 # Starting with the directory where the CSVs are stored
 directory = './bounties/'
@@ -38,12 +39,20 @@ for filename in csv_files:
                 'link': task_link  # Add the link to the task details
             })
 
-                
         print(f"Extracted {df.shape[0]} tasks from {filename}.")
     except Exception as e:
         print(f"Error processing file {filename}: {e}")
 
+# Save tasks to a JSON file after extracting tasks from all CSVs
+json_file_path = './scripts/tasks.json'  # Path where the JSON file will be saved
+with open(json_file_path, "w") as f:
+    json.dump(tasks, f)
+print(f"JSON file generated: {json_file_path}")
+
 print(f"Total tasks extracted: {len(tasks)}")
+
+
+
 
 # Filter out tasks with valid date_posted
 filtered_tasks = [task for task in tasks if task['date_posted'] != 'N/A']

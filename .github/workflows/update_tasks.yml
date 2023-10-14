@@ -36,7 +36,7 @@ jobs:
 
       - name: Commit and push changes
         run: |
-          git add ./scripts/*.txt index.html
+          git add ./scripts/*.txt index.html ./scripts/server-list.json
           git commit -m "Update tasks text files" || echo "No changes to commit"
           git pull --rebase origin main
           git push origin main

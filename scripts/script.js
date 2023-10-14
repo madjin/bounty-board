@@ -123,5 +123,36 @@ window.addEventListener("resize", function() {
               .restart();
 });
 
+async function fetchAndUpdateServerList() {
+    try {
+        // Fetch the JSON file from your GitHub repository.
+        // Replace 'your-repo-url' with the actual URL to the JSON file in your repo
+        const response = await fetch('https://raw.githubusercontent.com/your-repo-url/server-list.json');
+        
+        if (response.status === 200) {
+            const data = await response.json();
+            
+            // Clear existing list
+            const serverList = d3.select("#server-list");
+            serverList.html("");
+            
+            // Update the server-list with fetched JSON data
+            data.servers.forEach(server => {
+                const listItem = serverList.append("li");
+                listItem.text(`${server.name}: ${server.users} users`);
+                listItem.on("click", function() {
+                    window.location.href = server.url;
+                });
+            });
+        }
+    } catch (error) {
+        console.error("Error fetching server list: ", error);
+    }
+}
+
+// Call this function to populate server list
+fetchAndUpdateServerList();
+
+
 // Call this function only once after the simulation is initialized
 applyFlickerEffect(g.selectAll("circle").filter(d => d.users > 1500));
