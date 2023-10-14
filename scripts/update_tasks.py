@@ -2,6 +2,7 @@ import os
 import pandas as pd
 from datetime import datetime
 import re
+from html import escape
 
 # Starting with the directory where the CSVs are stored
 directory = './bounties/'
@@ -101,14 +102,20 @@ html_output = """
         <div id="content" class="content">
                     <h1>New Bounties</h1>
                     <ul>
-                    """
+"""
 
-for task in top_5_tasks:
-    amount = task.get('amount', '$TBD')
-    date_posted_dt = task.get('date_posted_dt', 'No Date')
-    link = task.get('link', '#')  # Use the link from the task dictionary
-    name = task.get('name', 'Unnamed Task')
-    html_output += f'<li><a href="{link}" target="_blank">{name}</a> | {amount} </li>\n'
+print(f"top_5_tasks contains: {top_5_tasks}")  # Debug: check if top_5_tasks is populated
+
+if top_5_tasks:
+    for task in top_5_tasks:
+        print(f"Processing task: {task}")  # Debug: print the task being processed
+        amount = escape(task.get('amount', '$TBD'))
+        date_posted_dt = escape(task.get('date_posted_dt', 'No Date'))
+        link = escape(task.get('link', '#'))  # Use the link from the task dictionary
+        name = escape(task.get('name', 'Unnamed Task'))
+        html_output += f'<li><a href="{link}" target="_blank">{name}</a> | {amount} </li>\n'
+else:
+    print("top_5_tasks is empty.")  # Debug: if top_5_tasks is empty, this line will print
 
 html_output += """
                     </ul>
