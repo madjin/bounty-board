@@ -44,7 +44,7 @@ for filename in csv_files:
         print(f"Error processing file {filename}: {e}")
 
 # Save tasks to a JSON file after extracting tasks from all CSVs
-json_file_path = './scripts/tasks.json'  # Path where the JSON file will be saved
+json_file_path = '../scripts/tasks.json'  # Path where the JSON file will be saved
 with open(json_file_path, "w") as f:
     json.dump(tasks, f)
 print(f"JSON file generated: {json_file_path}")
