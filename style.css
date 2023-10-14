@@ -73,20 +73,20 @@ body {
     margin: 0;
     }
 
-#server-list {
+#task-list {
    
     padding: 0;
     margin: 0;
     }
 
-#server-list li {
+#task-list li {
     
     cursor: pointer;
     padding: 5;
     margin: 0;
     }
 
-#server-list li:hover {
+#task-list li:hover {
     background-color: #003300;
     }
 
