@@ -127,7 +127,8 @@ async function fetchAndUpdateServerList() {
     try {
         // Fetch the JSON file from your GitHub repository.
         // Replace 'your-repo-url' with the actual URL to the JSON file in your repo
-        const response = await fetch('https://raw.githubusercontent.com/your-repo-url/server-list.json');
+        const response = await fetch('/tasks.json');
+
         
         if (response.status === 200) {
             const data = await response.json();
