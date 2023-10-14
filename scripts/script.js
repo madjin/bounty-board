@@ -83,7 +83,7 @@ function ticked() {
         .on("mouseover", function(d) {
             const tooltip = document.getElementById('tooltip');
             tooltip.style.display = "inline";
-            tooltip.innerText = `${d.name}: ${d.users} users`;
+            tooltip.innerText = `${d.name}`;
         })
         .on("mouseout", function() {
             const tooltip = document.getElementById('tooltip');
@@ -125,44 +125,7 @@ window.addEventListener("resize", function() {
               .restart();
 });
 
-async function fetchAndUpdateTaskList() {
-    try {
-        const response = await fetch('/tasks.json');
-        console.log('Fetch response:', response);
 
-        const contentType = response.headers.get("content-type");
-        console.log('Content-Type:', contentType);
-
-        if (contentType && contentType.indexOf("application/json") !== -1) {
-            if (response.status === 200) {
-                const data = await response.json();
-                console.log("Fetched data:", data);
-
-                const taskList = d3.select("#task-list");
-               taskList.html("");
-                
-                data.tasks.forEach(task => {
-                    const listItem = taskList.append("li");
-                    listItem.text(`${task.name}: ${task.users} users`);
-                    listItem.on("click", function() {
-                        window.location.href = task.url;
-                    });
-                });
-            } else {
-                console.error(`Received unexpected status code: ${response.status}`);
-            }
-        } else {
-            throw new Error("Received non-JSON content type");
-        }
-    } catch (error) {
-        console.error("Error fetching task list: ", error, error.stack);
-    }
-}
-
-
-
-// Call this function to populate task list
-fetchAndUpdateTaskList();
 
 
 // Call this function only once after the simulation is initialized

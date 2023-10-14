@@ -106,12 +106,16 @@ html_output = """
 
 # Iterate through all tasks and generate list items for "All Bounties"
 for task in tasks:
-    amount = escape(task.get('amount', '$TBD'))
-    date_posted_dt = escape(str(task.get('date_posted_dt', 'No Date')))
-    link = escape(task.get('link', '#'))
-    name = escape(task.get('name', 'Unnamed Task'))
+        print(f"Processing task: {task}")  # Debug: print the task being processed
 
-    html_output += f'<li><a href="{link}" target="_blank">{name}</a> | {amount} | {date_posted_dt} </li>\n'
+        # Only escape if it's a string
+        amount = escape(task.get('amount', '$TBD')) if isinstance(task.get('amount', '$TBD'), str) else task.get('amount', '$TBD')
+        date_posted_dt = task.get('date_posted_dt', 'No Date')
+        date_posted_dt = escape(str(date_posted_dt)) if isinstance(date_posted_dt, datetime) else 'No Date'
+        link = escape(task.get('link', '#')) if isinstance(task.get('link', '#'), str) else task.get('link', '#')
+        name = escape(task.get('name', 'Unnamed Task')) if isinstance(task.get('name', 'Unnamed Task'), str) else task.get('name', 'Unnamed Task')
+        
+        html_output += f'<li><a href="{link}" target="_blank">{name}</a> | {amount} | {date_posted_dt} </li>\n'
 
 html_output += """            
             </ul>
