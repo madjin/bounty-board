@@ -25,13 +25,19 @@ jobs:
       - name: Run script to update text files
         run: python scripts/update_tasks.py
 
-      - name: Push changes
+      - name: Check for file changes
+        id: git-check
+        run: echo ::set-output name=status::$(git status --porcelain)
+
+      - name: Configure Git
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
+
+      - name: Commit and push changes
+        run: |
           git add ./scripts/*.txt index.html
           git commit -m "Update tasks text files" || echo "No changes to commit"
           git pull --rebase origin main
           git push origin main
-        env:
-          GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
+        if: steps.git-check.outputs.status != ''
