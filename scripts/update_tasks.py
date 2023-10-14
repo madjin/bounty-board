@@ -151,9 +151,15 @@ print(f"HTML page generated: {html_file_path}")
 # ... [Rest of the script] ...
 
 
+absolute_directory = './scripts/'
+
+# Check and create target directory
+if not os.path.exists(absolute_directory):
+    os.makedirs(absolute_directory)
+
 # Generate the text files
 for index, task in enumerate(formatted_tasks, 1):
-    file_path = os.path.join("../scripts/", f"task{index}.txt")
+    file_path = os.path.join(absolute_directory, f"task{index}.txt")
     with open(file_path, "w") as file:
         file.write(task)
     print(f"Saved: {file_path}")
