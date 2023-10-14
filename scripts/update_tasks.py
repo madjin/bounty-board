@@ -53,9 +53,6 @@ print(f"JSON file generated: {json_file_path}")
 
 print(f"Total tasks extracted: {len(tasks)}")
 
-
-
-
 # Filter out tasks with valid date_posted
 filtered_tasks = [task for task in tasks if task['date_posted'] != 'N/A']
 
@@ -104,7 +101,24 @@ html_output = """
     <div id="container" class="container">
         <div id="text-section" class="text-section">
             <h1>All Bounties</h1>
-            <ul id="server-list"></ul>
+            <ul id="task-list">
+"""
+
+# Iterate through all tasks and generate list items for "All Bounties"
+for task in tasks:
+        print(f"Processing task: {task}")  # Debug: print the task being processed
+
+        # Only escape if it's a string
+        amount = escape(task.get('amount', '$TBD')) if isinstance(task.get('amount', '$TBD'), str) else task.get('amount', '$TBD')
+        date_posted_dt = task.get('date_posted_dt', 'No Date')
+        date_posted_dt = escape(str(date_posted_dt)) if isinstance(date_posted_dt, datetime) else 'No Date'
+        link = escape(task.get('link', '#')) if isinstance(task.get('link', '#'), str) else task.get('link', '#')
+        name = escape(task.get('name', 'Unnamed Task')) if isinstance(task.get('name', 'Unnamed Task'), str) else task.get('name', 'Unnamed Task')
+        
+        html_output += f'<li><a href="{link}" target="_blank">{name}</a> | {amount} | {date_posted_dt} </li>\n'
+
+html_output += """            
+            </ul>
         </div>
         <div id="svg-section">
             <div id="graph"></div>
