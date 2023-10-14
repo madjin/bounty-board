@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Node Graph Example</title>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <style>
+        /* Add or merge these styles */
+        #container {
+            display: flex;
+        }
+        #svg-section {
+            flex-grow: 1;
+        }
+        #list-section {
+            width: 30%;
+            overflow-y: auto;
+            background-color: #000;
+            color: #00ff00;
+            }
+
+            #svg-section {
+            width: 70%;
+            background-color: black;
+            }
+        #text-section {
+            width: 25%;
+            overflow-y: auto;
+            height: 100vh;
+            background-color: black;
+            color: #00ff00;
+            font-family: 'Courier New', Courier, monospace;
+            }
+            #server-list {
+                list-style: none;
+                margin: 0;
+                padding: 0;
+            }
+            #server-list li {
+                padding: 10px;
+                cursor: pointer;
+            }
+            #server-list li:hover {
+                background-color: #003300;
+            }
+
+        #graph-section {
+            width: 75%;
+        }
+        /* Existing styles */
+        #tooltip {
+            position: fixed;
+            pointer-events: none;
+            display: none;
+            background-color: #003300;
+            color: #00ff00;
+            border: 1px solid #06e42b;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="text-section">
+            <ul id="server-list"></ul>
+        </div>
+        <div id="svg-section">
+            <div id="graph"></div>
+        </div>
+    </div>
+    
+    <div id="tooltip" style="display:none;">
+        <!-- Tooltip content -->
+    </div>
+    <script src="scripts/script.js"></script>
+</body>
+</html>
