@@ -23,7 +23,7 @@ jobs:
           pip install pandas
 
       - name: Run script to update text files
-        run: python update_tasks.py
+        run: python scripts/update_tasks.py
 
       - name: Push changes
         run: |
