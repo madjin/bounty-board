@@ -1,22 +1,155 @@
-#container {
-  display: flex;
-  flex-direction: row;
-}
+ /* Add or merge these styles */
+body {
+    font-family: 'Courier New', Courier, monospace;
+    background: black url('matte.jpg') no-repeat center center fixed; /* Assuming this image has the TV graphic in it */
+    background-size: cover;
+    color: #00FF00;
+    }
+
+ #container {
+    display: flex;
+    }
+
+#svg-section {
+    flex-grow: 1;
+    }
+
+#list-section {
+    width: 30%;
+    background-color: #000;
+    color: #00ff00;
+    }
+
+#svg-section {
+    width: 70%;
+    background-color: black;
+    }
 
 #text-section {
-  flex: 1;
-  overflow-y: auto;
+    width: 25vw; /* Adjust to fit the screen of your TV graphic in the image */
+    height: 100vw; /* It's using the viewport width to ensure it maintains its aspect ratio */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: clamp(1vw, 2vmin, 2vw);
+    background: rgb(0, 0, 0);  
+    scrollbar-color: transparent transparent; /* Both thumb (handle) and track are transparent */
+    scrollbar-width: none;
+    }
+
+#server-list {
+   
+    margin: 0;
+    padding: 0;
+    }
+
+#server-list li {
+    padding: 10px;
+    cursor: pointer;
+    }
+
+#server-list li:hover {
+    background-color: #003300;
+    }
+
+#graph-section {
+    width: 75%;
+    }
+
+/* Existing styles */
+#tooltip {
+    position: fixed;
+    pointer-events: none;
+    display: none;
+    background-color: #003300;
+    color: #00ff00;
+    border: 1px solid #06e42b;
+    padding: 5px;
+    }
+
+/* HUD styles */
+.hud {
+    position: fixed;
+    bottom: 1vw; /* Distance from the bottom */
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 1em; /* Space between badges */
+    }
+
+.badge {
+    width: 3vw; /* Adjust size as needed */
+    filter: grayscale(1); /* Desaturate the badge */
+    opacity: 0.8; /* Make it slightly transparent */
+    position: relative; /* To position the tooltip */
+    z-index: 1000;  /* ensure it's above other elements */
+    }
+
+.badge:hover {
+    filter: grayscale(0); /* Fully colored on hover */
+    opacity: 1; /* Fully opaque on hover */
+    }
+
+.badge::before {
+    content: attr(data-tooltip); /* Use data attribute for tooltip text */
+    position: absolute;
+    bottom: 100%; /* Place it above the badge */
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);  /* combining the two transforms */
+    background-color: rgba(0, 255, 0, 0.9); /* Green background with slight transparency */
+    padding: 0.2em 0.5em;
+    border-radius: 5px;
+    font-size: 0.8em;
+    white-space: nowrap; /* Prevent the text from wrapping */
+    }
+
+.badge:hover::before {
+    opacity: 1;
+    }
+
+.content {
+    width: 40vw; /* Adjust to fit the screen of your TV graphic in the image */
+    height: 30vw; /* It's using the viewport width to ensure it maintains its aspect ratio */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: clamp(1vw, 2vmin, 2vw);
+    padding: 1.5vw;
+    background: rgb(0, 0, 0);  
+    overflow-y: auto;
+    scrollbar-color: transparent transparent; /*  Both thumb (handle) and track are transparent */
+    scrollbar-width: none;
+    padding-top: 4vw; /* Add this line to push content down */   
 }
 
-#visual-section {
-  flex: 2;
-  position: relative;
+
+h1 {
+    text-align: center;
+    margin-bottom: em;
+    font-size: clamp(1vw, 1vmin, 1vw);
 }
 
-#graph {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+ul {
+    list-style-type: none;
+    padding: 0;
+    width: 100%;
 }
+
+li {
+    margin: 0.5em 0;
+    border: 1px dashed #00FF00;
+    padding: 0.5em;
+    word-wrap: break-word;
+}
+
+a {
+    color: #00FF00;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+
