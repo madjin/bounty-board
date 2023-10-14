@@ -1,0 +1,38 @@
+name: Update Tasks Text Files
+
+on:
+  push:
+    paths:
+      - '**.csv'
+
+jobs:
+  update_files:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3  # Use the latest version if available
+
+      - name: Set up Python
+        uses: actions/setup-python@v3  # Use the latest version if available
+        with:
+          python-version: 3.8
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pandas
+
+      - name: Run script to update text files
+        run: python update_tasks.py
+
+      - name: Push changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add task1.txt task2.txt task3.txt task4.txt task5.txt index.html
+          git commit -m "Update tasks text files" || echo "No changes to commit"
+          git pull --rebase origin main
+          git push origin main
+        env:
+          GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
+      
