@@ -1,21 +1,25 @@
 
+# Bounty-Board 0.01a
 
 ![image](https://github.com/gm3/bounty-board/assets/7612104/d18da500-d657-4858-b2ee-ace9c90721de)
 
-# Bounty-Board 0.01a
 
 ### Project Details
 - DeWork Bounty Board that auto updates with a runner, just have to pull request or add new CSV files into the `bounties` folder.
 
-## Features
+## Instructions
 
-<details>
+### How to get CSV files from DeWork
+*  Go to **Manage** in *General Settings*
+*  ![](https://hackmd.io/_uploads/Hyxb03uWp.png)
+*  ![](https://hackmd.io/_uploads/S1rZ03dWp.png)
 
-</details>
-    
-### Code
 
-#### update-tasks.yml
+
+---
+## Scripts
+
+## update-tasks.yml
 https://github.com/gm3/bounty-board/blob/main/.github/workflows/update_tasks.yml
 
 
@@ -76,7 +80,7 @@ jobs:
 ---
 
 
-#### update_tasks.py
+## update_tasks.py
 
 <details>
     
@@ -294,7 +298,8 @@ print("Text files updated successfully!")
 
 
 
-#### script.js
+## script.js
+
 https://github.com/gm3/bounty-board/blob/main/scripts/script.js
 <details>
 
@@ -482,17 +487,6 @@ window.addEventListener("resize", function() {
     
     
 
----
-
-# Things to do
-
-
-
-## Other Ideas for Tracking Updates from the AI:
-
-
-
----
 
 
 
