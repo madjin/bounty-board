@@ -52,9 +52,10 @@ tasks.forEach(task => {
     const listItem = taskList.append("li");
     listItem.text(`${task.description}: ${isNaN(task.amount) ? '$TBD' : task.amount}$`);
     listItem.on("click", function() {
-        window.location.href = task.link;
+        window.open(task.link, '_blank');
     });
 });
+
 console.log(tasks);
 
 // Min max of amounts    
