@@ -31,7 +31,6 @@ const tasks = taskListItems.map((li, index) => {
         currency = amountMatch ? amountMatch[3] : null;
     }
 
-
     const dateMatch = remainingText.match(/\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}/);
     const date = dateMatch ? new Date(dateMatch[0]) : null;
 
@@ -47,14 +46,16 @@ const tasks = taskListItems.map((li, index) => {
 });
 
 // Populate the task list with D3
+// Populate the task list with D3
 const taskList = d3.select("#task-list");
 tasks.forEach(task => {
     const listItem = taskList.append("li");
     listItem.text(`${task.description}: ${isNaN(task.amount) ? '$TBD' : task.amount}$`);
     listItem.on("click", function() {
-        window.location.href = task.link;
+        window.open(task.link, '_blank');
     });
 });
+
 console.log(tasks);
 
 // Min max of amounts    
@@ -126,38 +127,38 @@ const simulation = d3.forceSimulation(tasks)
     .force('collision', d3.forceCollide().radius(fixedRadius))
     .on('tick', ticked);
 
-function ticked() {
-    const circles = g.selectAll("circle")
-        .data(tasks, d => d.id);
-
-    const newCircles = circles.enter()
-        .append('circle')
-        .attr('fill', d => {
-            if (isNaN(d.amount) || d.amount === undefined) {
-                return 'gray';  // default color if data is invalid
-            }
-            return colorScale(d.amount);
-        })
-        .attr('r', fixedRadius)
-        .on("mouseover", function(d) {
-            const tooltip = document.getElementById('tooltip');
-            tooltip.style.display = "inline";
-            tooltip.innerText = `${d.name}` + '|' + `${d.amount}` + '|' + `${d.date}` + '|' ;
-        })
-        .on("mouseout", function() {
-            const tooltip = document.getElementById('tooltip');
-            tooltip.style.display = "none";
-        })
-        .on("click", function(d) {
-            window.location.href = d.link;
-        });
-
-    newCircles.merge(circles)
-        .attr('cx', d => d.x)
-        .attr('cy', d => d.y);
-
-    circles.exit().remove();
-}
+    function ticked() {
+        const circles = g.selectAll("circle")
+            .data(tasks, d => d.id);
+    
+        const newCircles = circles.enter()
+            .append('circle')
+            .attr('fill', d => {
+                if (isNaN(d.amount) || d.amount === undefined) {
+                    return 'gray';  // default color if data is invalid
+                }
+                return colorScale(d.amount);
+            })
+            .attr('r', fixedRadius)
+            .on("mouseover", function(d) {
+                const tooltip = document.getElementById('tooltip');
+                tooltip.style.display = "inline";
+                tooltip.innerText = `${d.name}` + '|' + `${d.amount}` + '|' + `${d.date}` + '|';
+            })
+            .on("mouseout", function() {
+                const tooltip = document.getElementById('tooltip');
+                tooltip.style.display = "none";
+            })
+            .on("click", function(d) {
+                window.open(d.link, '_blank');
+            });
+    
+        newCircles.merge(circles)
+            .attr('cx', d => d.x)
+            .attr('cy', d => d.y);
+    
+        circles.exit().remove();
+    }
 
 // Re-adjust on window resize
 window.addEventListener("resize", function() {
