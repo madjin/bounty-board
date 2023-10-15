@@ -1,40 +1,18 @@
-# Bounty-Board
+
 
 ![image](https://github.com/gm3/bounty-board/assets/7612104/d18da500-d657-4858-b2ee-ace9c90721de)
 
-# AutoDocs 0.01a- Automation Suite
+# Bounty-Board 0.01a
 
 ### Project Details
-- Github Runner that looks for new updated .md files, and then it installed a docker container, and dependencies to pull the text content from the MD file and send it over to OpenAI, to get a summary. Current 2000 token limit. https://platform.openai.com/docs/guides/rate-limits
+- DeWork Bounty Board that auto updates with a runner, just have to pull request or add new CSV files into the `bounties` folder.
 
 ## Features
 
 <details>
 
-* Read .MD files, get all the links, create a paragraph summary
-* Create quiz to challenge if someone read and comprehended it
-* Auto document every script with a summery, and implemtation example
-* Auto Describe unfinished readmes with more info
-* Create new readme from scripts with no readme reference
-* Create API wiki, by describing the API calls and how to implement them
-* Create a FAQ readme and provide 10 general helpful starting questions about the data.
-* Take a transcription of a meeting notes, and then create a summary and actionable items list
-* Take a transcription of a Dao Counsil Meeting, and feed it into a AI Dao Meeting, as context
-* Work along side a real-time stable diffusion model, by listenting to meetings, and summerizing snapshots of the transcriptions at an interval (AutoMoodBoard)
-* Auto describe DeWork Tasks with potential routes to doing the bounty, for example, what software is need to do the bounty, and example code libraries and code to acheive the task
-
 </details>
     
-
-### Issues
-- Need to parse long hackMDs, and multiple files, and deal with rate limits, also with walking over files, and context management and making sure the AI receives multiple prompts to combine into one summary.
-
-Possible things to look into about large data sets.
-- Unstructured https://github.com/Unstructured-IO/unstructured
-
-- RIght now it ignores the main README.md and does not summarize it becuase it would create an infinate loop of new mds
-
-
 ### Code
 
 #### update-tasks.yml
